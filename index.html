@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Vue test</title>
+</head>
+
+<body>
+    <header>
+        <h2>Vue 3 tutorial</h2>
+    </header>
+    <div id="app">
+        <h1 class="app-title">Ticket Booking System</h1>
+        <div class="ticket-app">
+            <div class="ticket-app__top">
+                <div class="seat-states">
+                    <div class="seat-state" v-for="(value, key) in seatStates">
+                        <div class="seat-state__color" :style="{backgroundColor: value.color}"></div>
+                        <div class="seat-state__text">{{ value.text }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ticket-app__bottom">
+                <div class="ticket-app__left">
+                    <div class="bus">
+                        <div class="bus__top">
+                            <div class="bus__door">Door</div>
+                            <div class="bus__driver">Driver</div>
+                        </div>
+                        <div class="seats">
+                            <div class="seat" :class="{
+                                'seat--sold': seat.type==='sold',
+                                'seat--booked': seat.type==='booked',
+                                'seat--selected': seat.type==='selected' 
+                            }" v-for="(seat, i) in seats" :key="seat.name" @click="handleClick(i)">
+                                {{seat.name}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ticket-app__instruction" v-if="selectedSeats.length===0">
+                    No seat selected <br> Select seat first
+                </div>
+                <div class="ticket-app__right" v-else>
+                    {{selectedSeats}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="./app.js"></script>
+</body>
+
+</html>
